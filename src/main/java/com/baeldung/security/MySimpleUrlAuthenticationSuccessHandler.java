@@ -132,8 +132,4 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     private boolean isGeoIpLibEnabled() {
         return Boolean.parseBoolean(env.getProperty("geo.ip.lib.enabled"));
     }
-
-    private boolean hasManagerRole(GrantedAuthority grantedAuthority) {
-        return grantedAuthority.getAuthority().equals("MANAGER_ROLE");
-    }
 }
