@@ -81,6 +81,10 @@ public class SecSecurityConfig {
                 .expressionHandler(webSecurityExpressionHandler())
                 .antMatchers(HttpMethod.GET, "/roleHierarchy")
                 .hasRole("STAFF")
+            .and()
+            .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/management")
+                .hasRole("MANAGER")
             .antMatchers("/login*", "/logout*", "/signin/**", "/signup/**", "/customLogin", "/user/registration*", "/registrationConfirm*", "/expiredAccount*", "/registration*", "/badUser*", "/user/resendRegistrationToken*", "/forgetPassword*",
                 "/user/resetPassword*", "/user/savePassword*", "/updatePassword*", "/user/changePassword*", "/emailError*", "/resources/**", "/old/user/registration*", "/successRegister*", "/qrcode*", "/user/enableNewLoc*")
             .permitAll()
