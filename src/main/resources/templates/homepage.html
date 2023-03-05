@@ -16,9 +16,11 @@
 </nav>
 
     <div class="container">
-	    <div sec:authorize="hasAuthority('WRITE_PRIVILEGE')" th:utext="#{label.pages.user.message}">user</div>
+        <div sec:authorize="!hasAuthority('ROLE_ADMIN') and !hasAuthority('ROLE_MANAGER')" th:utext="#{label.pages.user.message}">user</div>
 	
-	    <div sec:authorize="hasAuthority('WRITE_PRIVILEGE')" th:utext="#{label.pages.admin.message}"></div>
+	    <div sec:authorize="hasAuthority('ROLE_ADMIN')" th:utext="#{label.pages.admin.message}"></div>
+
+        <div sec:authorize="hasAuthority('ROLE_MANAGER')" th:utext="#{label.pages.manager.message}"></div>
 	     
 	    <p th:if="${param.user} != null" th:text="${param.user[0]}">user</p>
 	     
@@ -27,7 +29,8 @@
 	    <a th:href="@{/loggedUsers}" th:utext="#{label.pages.users.message}">View logged in users</a>
 		<br />	    
 	    <a th:href="@{/loggedUsersFromSessionRegistry}" th:utext="#{label.pages.users.sessionregistry.message}">View logged in users</a>
-	    
+        <br />
+        <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')" th:href="@{/management}" th:utext="#{label.pages.management.message}">Management section</a>
     </div>
 </body>
 </html>
